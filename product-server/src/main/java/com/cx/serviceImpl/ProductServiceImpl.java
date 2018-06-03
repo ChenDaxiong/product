@@ -8,7 +8,8 @@ import com.cx.dataObject.ProductInfo;
 import com.cx.exception.ProductException;
 import com.cx.repository.ProductInfoRepository;
 import com.cx.service.ProductService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ import java.util.List;
  * Created by chenxiong on 18/5/8.
  */
 @Service
-@Slf4j
 public class ProductServiceImpl implements ProductService {
+    private Logger log= LoggerFactory.getLogger(ProductService.class);
 
     @Autowired
     private ProductInfoRepository productInfoRepository;
@@ -48,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductInfoForOrder> findList(List<String> productIds) {
         List<ProductInfo> productInfoList = productInfoRepository.findByProductIdIn(productIds);
         List<ProductInfoForOrder> result = new ArrayList<ProductInfoForOrder>();
-        if (!CollectionUtils.isEmpty(productInfoList)) {
+        if (CollectionUtils.isEmpty(productInfoList)) {
             log.info("商品不存在");
             return result;
         }

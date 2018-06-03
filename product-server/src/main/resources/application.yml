@@ -3,9 +3,9 @@ spring:
     name: product
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/springCloudDemo?characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/springCloud-Product?characterEncoding=utf8
     username: root
-    password: 123456
+    password: 19920807
   jpa:
    show-sql: true
 
@@ -16,4 +16,5 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: 127.0.0.1:8080
+
 

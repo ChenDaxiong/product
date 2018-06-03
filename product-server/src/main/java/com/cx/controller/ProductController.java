@@ -10,8 +10,10 @@ import com.cx.service.CategoryService;
 import com.cx.service.ProductService;
 import com.cx.vo.ProductInfoVo;
 import com.cx.vo.ProductResultVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,8 +24,8 @@ import java.util.List;
  * Created by chenxiong on 18/5/8.
  */
 
-@RestController
-@RequestMapping("/product")
+@Controller
+@Slf4j
 public class ProductController {
 
     @Autowired
@@ -52,6 +54,7 @@ public class ProductController {
         //从数据库中查询类目
         List<ProductCategory> categoryList = categoryService.findByCategoryType(categoryIds);
 
+
         //构造数据
         List<ProductResultVo> productResultVoList = new ArrayList<>();
         for (ProductCategory productCategory : categoryList) {
@@ -79,8 +82,10 @@ public class ProductController {
     /**
      * @param
      * @return 获取商品列表，供订单服务调用
+     * 这里注意使用@RequestBody注解就需要
      */
-    @PostMapping("/listForOrder")
+    @RequestMapping(value = "product/listByIds")
+    @ResponseBody
     public List<ProductInfoForOrder> getProductList(@RequestBody List<String> productIdList) {
         List<ProductInfoForOrder> result = productService.findList(productIdList);
         return result;
@@ -92,9 +97,11 @@ public class ProductController {
      * @return
      * @RequestBody：将请求参数作json解析
      */
-    @PostMapping("/decreaseStock")
+    @PostMapping(value = "product/decreaseStock")
+    @ResponseBody
     public void decrease(@RequestBody List<DecreaseStockInput> decreaseStockInputList) {
         productService.decreaseStock(decreaseStockInputList);
+        log.info("减库存成功");
 
     }
 
