@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * Created by chenxiong on 18/5/11.
- * 取一个具有本服务特征的名字作为某个借口的入参，不适合直接用其它服务相同的名称。
+ * 取一个具有本服务特征的名字作为某个接口的入参，不适合直接用其它服务相同的名称。
  */
 @Data
 public class DecreaseStockInput {

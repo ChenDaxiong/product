@@ -1,11 +1,9 @@
 package com.cx.common;
 
-import lombok.Getter;
 
 /**
  * Created by chenxiong on 18/5/11.
  */
-@Getter
 public enum ProductExceptionEnum {
 
     PRODUCT_NOT_EXIST(1, "商品不存在"),
@@ -18,5 +16,13 @@ public enum ProductExceptionEnum {
     ProductExceptionEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
